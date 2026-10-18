@@ -1,0 +1,338 @@
+{
+  "meta": {
+    "tajuk": "Dyno Project OS",
+    "jabatan": "Jabatan Projek",
+    "tahun": "2026",
+    "dikemaskini": "2026-10-18",
+    "oleh": "Pengurusan",
+    "sumber": "Data contoh rekaan untuk mod demo — bukan rekod pelanggan sebenar"
+  },
+  "projek": [
+    {
+      "kod": "PRJ-01",
+      "nama": "Ubah suai rumah teres 2 tingkat",
+      "klien": "EN AHMAD FAUZI",
+      "lokasi": "TAMAN CONTOH 1, SHAH ALAM",
+      "telefon": "012-555 0201",
+      "pic": "",
+      "status": "Siap",
+      "nilai": 185000,
+      "mula": "2026-02-03",
+      "inv": "INV-0001",
+      "nota": "",
+      "aliran": {
+        "sebutHarga": true,
+        "deposit": true,
+        "lukisan": true,
+        "bahan": true,
+        "tapak": true,
+        "pemeriksaan": true,
+        "serahan": true,
+        "baki": true
+      }
+    },
+    {
+      "kod": "PRJ-02",
+      "nama": "Bina banglo 1 tingkat",
+      "klien": "PUAN SITI AMINAH",
+      "lokasi": "KG CONTOH, KUALA SELANGOR",
+      "telefon": "019-555 0202",
+      "pic": "",
+      "status": "Siap",
+      "nilai": 420000,
+      "mula": "2025-11-10",
+      "inv": "INV-0002",
+      "nota": "",
+      "aliran": {
+        "sebutHarga": true,
+        "deposit": true,
+        "lukisan": true,
+        "bahan": true,
+        "tapak": true,
+        "pemeriksaan": true,
+        "serahan": true,
+        "baki": true
+      }
+    },
+    {
+      "kod": "PRJ-03",
+      "nama": "Pejabat jualan — fasa 1",
+      "klien": "PEMAJU CONTOH SDN BHD",
+      "lokasi": "BANDAR CONTOH, SEPANG",
+      "telefon": "03-5555 0203",
+      "pic": "",
+      "status": "Dalam Progres",
+      "nilai": 960000,
+      "mula": "2026-04-01",
+      "inv": "INV-0003",
+      "nota": "",
+      "aliran": {
+        "sebutHarga": true,
+        "deposit": true,
+        "lukisan": true,
+        "bahan": true,
+        "tapak": true,
+        "pemeriksaan": false,
+        "serahan": false,
+        "baki": false
+      }
+    },
+    {
+      "kod": "PRJ-04",
+      "nama": "Sambungan dapur & bumbung",
+      "klien": "MR DANIEL TAN",
+      "lokasi": "TAMAN CONTOH 2, CHERAS",
+      "telefon": "016-555 0204",
+      "pic": "",
+      "status": "Dalam Progres",
+      "nilai": 78000,
+      "mula": "2026-06-15",
+      "inv": "INV-0004",
+      "nota": "",
+      "aliran": {
+        "sebutHarga": true,
+        "deposit": true,
+        "lukisan": true,
+        "bahan": true,
+        "tapak": false,
+        "pemeriksaan": false,
+        "serahan": false,
+        "baki": false
+      }
+    },
+    {
+      "kod": "PRJ-05",
+      "nama": "Kerja longkang & pagar",
+      "klien": "MAJLIS CONTOH",
+      "lokasi": "JALAN CONTOH, KLANG",
+      "telefon": "",
+      "pic": "",
+      "status": "Dalam Progres",
+      "nilai": 132000,
+      "mula": "2026-07-02",
+      "inv": "INV-0005",
+      "nota": "",
+      "aliran": {
+        "sebutHarga": true,
+        "deposit": true,
+        "lukisan": true,
+        "bahan": false,
+        "tapak": false,
+        "pemeriksaan": false,
+        "serahan": false,
+        "baki": false
+      }
+    },
+    {
+      "kod": "PRJ-06",
+      "nama": "Kemasan dalaman kondo",
+      "klien": "MS LIM WEI",
+      "lokasi": "RESIDENSI CONTOH, MONT KIARA",
+      "telefon": "012-555 0206",
+      "pic": "",
+      "status": "Baru",
+      "nilai": 64000,
+      "mula": "2026-09-20",
+      "inv": "INV-0006",
+      "nota": "",
+      "aliran": {
+        "sebutHarga": true,
+        "deposit": false,
+        "lukisan": false,
+        "bahan": false,
+        "tapak": false,
+        "pemeriksaan": false,
+        "serahan": false,
+        "baki": false
+      }
+    },
+    {
+      "kod": "PRJ-07",
+      "nama": "Bengkel kilang ringan",
+      "klien": "SYARIKAT CONTOH ENTERPRISE",
+      "lokasi": "ZON CONTOH, RAWANG",
+      "telefon": "",
+      "pic": "",
+      "status": "Tertunda",
+      "nilai": 510000,
+      "mula": "2026-05-12",
+      "inv": "INV-0007",
+      "nota": "",
+      "aliran": {
+        "sebutHarga": true,
+        "deposit": true,
+        "lukisan": false,
+        "bahan": false,
+        "tapak": false,
+        "pemeriksaan": false,
+        "serahan": false,
+        "baki": false
+      }
+    },
+    {
+      "kod": "PRJ-08",
+      "nama": "Rumah kedai 3 tingkat (4 unit)",
+      "klien": "PEMAJU CONTOH SDN BHD",
+      "lokasi": "BANDAR CONTOH, SEPANG",
+      "telefon": "03-5555 0203",
+      "pic": "",
+      "status": "Baru",
+      "nilai": 1450000,
+      "mula": "2026-10-01",
+      "inv": "",
+      "nota": "",
+      "aliran": {
+        "sebutHarga": false,
+        "deposit": false,
+        "lukisan": false,
+        "bahan": false,
+        "tapak": false,
+        "pemeriksaan": false,
+        "serahan": false,
+        "baki": false
+      }
+    }
+  ],
+  "bayaran": [
+    {
+      "id": 1,
+      "kod": "PRJ-01",
+      "jenis": "Deposit",
+      "amaun": 37000,
+      "tarikh": "2026-02-05",
+      "kaedah": "Pindahan Bank",
+      "ruj": "TT260205",
+      "status": "Diterima"
+    },
+    {
+      "id": 2,
+      "kod": "PRJ-01",
+      "jenis": "Bayaran Progres",
+      "amaun": 92500,
+      "tarikh": "2026-03-28",
+      "kaedah": "Pindahan Bank",
+      "ruj": "TT260328",
+      "status": "Diterima"
+    },
+    {
+      "id": 3,
+      "kod": "PRJ-01",
+      "jenis": "Baki Akhir",
+      "amaun": 55500,
+      "tarikh": "2026-05-14",
+      "kaedah": "Cek",
+      "ruj": "TT260514",
+      "status": "Diterima"
+    },
+    {
+      "id": 4,
+      "kod": "PRJ-02",
+      "jenis": "Deposit",
+      "amaun": 84000,
+      "tarikh": "2025-11-12",
+      "kaedah": "Pindahan Bank",
+      "ruj": "TT251112",
+      "status": "Diterima"
+    },
+    {
+      "id": 5,
+      "kod": "PRJ-02",
+      "jenis": "Bayaran Progres",
+      "amaun": 210000,
+      "tarikh": "2026-02-20",
+      "kaedah": "Pindahan Bank",
+      "ruj": "TT260220",
+      "status": "Diterima"
+    },
+    {
+      "id": 6,
+      "kod": "PRJ-02",
+      "jenis": "Baki Akhir",
+      "amaun": 126000,
+      "tarikh": "2026-06-30",
+      "kaedah": "Pindahan Bank",
+      "ruj": "TT260630",
+      "status": "Diterima"
+    },
+    {
+      "id": 7,
+      "kod": "PRJ-03",
+      "jenis": "Deposit",
+      "amaun": 192000,
+      "tarikh": "2026-04-03",
+      "kaedah": "Pindahan Bank",
+      "ruj": "TT260403",
+      "status": "Diterima"
+    },
+    {
+      "id": 8,
+      "kod": "PRJ-03",
+      "jenis": "Bayaran Progres",
+      "amaun": 288000,
+      "tarikh": "2026-07-18",
+      "kaedah": "Pindahan Bank",
+      "ruj": "TT260718",
+      "status": "Diterima"
+    },
+    {
+      "id": 9,
+      "kod": "PRJ-03",
+      "jenis": "Bayaran Progres",
+      "amaun": 144000,
+      "tarikh": "2026-10-05",
+      "kaedah": "Pindahan Bank",
+      "ruj": "TT261005",
+      "status": "Menunggu"
+    },
+    {
+      "id": 10,
+      "kod": "PRJ-04",
+      "jenis": "Deposit",
+      "amaun": 23400,
+      "tarikh": "2026-06-16",
+      "kaedah": "DuitNow",
+      "ruj": "TT260616",
+      "status": "Diterima"
+    },
+    {
+      "id": 11,
+      "kod": "PRJ-04",
+      "jenis": "Bayaran Progres",
+      "amaun": 19500,
+      "tarikh": "2026-08-22",
+      "kaedah": "DuitNow",
+      "ruj": "TT260822",
+      "status": "Diterima"
+    },
+    {
+      "id": 12,
+      "kod": "PRJ-05",
+      "jenis": "Deposit",
+      "amaun": 26400,
+      "tarikh": "2026-07-04",
+      "kaedah": "Cek",
+      "ruj": "TT260704",
+      "status": "Diterima"
+    },
+    {
+      "id": 13,
+      "kod": "PRJ-06",
+      "jenis": "Deposit",
+      "amaun": 12800,
+      "tarikh": "2026-09-22",
+      "kaedah": "FPX",
+      "ruj": "TT260922",
+      "status": "Diterima"
+    },
+    {
+      "id": 14,
+      "kod": "PRJ-07",
+      "jenis": "Deposit",
+      "amaun": 102000,
+      "tarikh": "2026-05-15",
+      "kaedah": "Pindahan Bank",
+      "ruj": "TT260515",
+      "status": "Diterima"
+    }
+  ]
+}
