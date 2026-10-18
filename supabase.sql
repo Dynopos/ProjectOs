@@ -163,6 +163,78 @@ do $$ begin
   alter publication supabase_realtime add table public.bayaran;
 exception when others then raise notice 'Realtime dilangkau untuk bayaran: %', sqlerrm; end $$;
 
+-- ---------- 8. PERBELANJAAN PROJEK ----------
+-- Material, upah, subkontraktor dan kos lain, diikat pada projek melalui kod
+-- (sama seperti bayaran — lihat CLAUDE.md "kod ialah rujukan sebenar").
+create table if not exists public.belanja (
+  id           uuid primary key default gen_random_uuid(),
+  projek_id    uuid references public.projek(id) on delete cascade,
+  kod          text not null references public.projek(kod) on update cascade on delete cascade,
+  kategori     text not null default 'Material',
+  amaun        numeric(12,2) not null default 0,
+  tarikh       date,
+  penerima     text,
+  nota         text,
+  resit_path   text,
+  dicipta_oleh text not null default auth.email(),
+  diubah_oleh  text,
+  created_at   timestamptz not null default now(),
+  updated_at   timestamptz not null default now()
+);
+create index if not exists idx_belanja_kod    on public.belanja(kod);
+create index if not exists idx_belanja_tarikh on public.belanja(tarikh desc);
+
+-- "Nama staf yang membuat rekod" mesti boleh dipercayai: pelayan yang mengisinya,
+-- bukan klien. Insert ditolak jika dicipta_oleh bukan e-mel pengguna sendiri;
+-- update tidak boleh mengubahnya, dan diubah_oleh diisi automatik.
+create or replace function public.kunci_belanja()
+returns trigger language plpgsql as $$
+begin
+  new.dicipta_oleh := old.dicipta_oleh;
+  new.created_at   := old.created_at;
+  new.diubah_oleh  := auth.email();
+  new.updated_at   := now();
+  return new;
+end $$;
+drop trigger if exists trg_belanja_kunci on public.belanja;
+create trigger trg_belanja_kunci before update on public.belanja
+  for each row execute function public.kunci_belanja();
+
+alter table public.belanja enable row level security;
+drop policy if exists "belanja - baca"   on public.belanja;
+create policy "belanja - baca"   on public.belanja for select to authenticated using (true);
+drop policy if exists "belanja - tambah" on public.belanja;
+create policy "belanja - tambah" on public.belanja for insert to authenticated
+  with check (dicipta_oleh = auth.email());
+drop policy if exists "belanja - ubah"   on public.belanja;
+create policy "belanja - ubah"   on public.belanja for update to authenticated using (true) with check (true);
+drop policy if exists "belanja - padam"  on public.belanja;
+create policy "belanja - padam"  on public.belanja for delete to authenticated using (true);
+grant select, insert, update, delete on public.belanja to authenticated;
+
+do $$ begin
+  alter publication supabase_realtime add table public.belanja;
+exception when others then raise notice 'Realtime dilangkau untuk belanja: %', sqlerrm; end $$;
+
+-- ---------- 9. STORAN GAMBAR RESIT ----------
+-- Bucket PERIBADI: resit hanya boleh dibuka melalui URL bertandatangan 5 minit
+-- yang dijana untuk pengguna yang sudah log masuk. Had 10 MB, gambar & PDF sahaja.
+do $$ begin
+  insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+  values ('resit','resit',false,10485760,
+          array['image/jpeg','image/png','image/webp','image/heic','image/heif','application/pdf'])
+  on conflict (id) do nothing;
+
+  drop policy if exists "resit - baca"   on storage.objects;
+  create policy "resit - baca"   on storage.objects for select to authenticated using (bucket_id = 'resit');
+  drop policy if exists "resit - muat naik" on storage.objects;
+  create policy "resit - muat naik" on storage.objects for insert to authenticated with check (bucket_id = 'resit');
+  drop policy if exists "resit - padam"  on storage.objects;
+  create policy "resit - padam"  on storage.objects for delete to authenticated using (bucket_id = 'resit');
+exception when others then
+  raise notice 'Storan resit DILANGKAU: %. Cipta bucket "resit" (private) secara manual dalam Storage.', sqlerrm;
+end $$;
+
 -- =====================================================================
 --  SELESAI.
 --

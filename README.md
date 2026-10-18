@@ -18,6 +18,8 @@ Supabase. Kos hosting: percuma untuk kebanyakan syarikat.
 | **Projek & arkib** | Projek siap keluar automatik ke tab berasingan — senarai utama kekal pendek |
 | **Pembayaran** | Deposit, progres, baki akhir; status *Menunggu* untuk cek belum jelas |
 | **Klien** | Ringkasan setiap klien — nilai, kutipan, baki |
+| **Perbelanjaan** | Material, upah, subkon, pengangkutan, peralatan — dengan gambar resit terus dari kamera telefon dan nama staf yang merekod |
+| **Baki terkini** | Angka besar di atas Dashboard: duit masuk − perbelanjaan, keseluruhan atau ikut projek |
 | **Aliran kerja** | Peringkat kerja sendiri (sebut harga → serahan), boleh ditetapkan setiap syarikat |
 | **Import Excel** | Padanan lajur automatik — masukkan data lama sekali gus |
 | **Eksport CSV** | Projek, arkib, klien |
@@ -39,6 +41,7 @@ GitHub → **Use this template** (atau fork) → nama cth `syarikat-abc-projek` 
 
 1. [supabase.com](https://supabase.com) → **New project** → region **Southeast Asia (Singapore)**
 2. **SQL Editor** → **New query** → tampal seluruh `supabase.sql` → **Run** → mesti keluar *Success*
+   (skrip ini juga mencipta storan peribadi `resit` untuk gambar resit — tiada langkah tambahan)
 3. **Authentication → Providers → Email** → **biarkan provider hidup**, matikan **Enable sign ups** sahaja
 4. **Authentication → Users → Add user** untuk setiap staf, tanda **Auto Confirm User**
 

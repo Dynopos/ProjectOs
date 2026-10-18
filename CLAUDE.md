@@ -51,6 +51,7 @@ README.md           ← panduan pengguna (BM)
 | `LOGO` | 1–3 huruf dalam kotak logo. Kosong = `inisial(SYARIKAT)`. |
 | `KOD_AWALAN` | Awalan kod projek (`kodSeterusnya()`, `huraiFlow()`). Lalai `PRJ-`. |
 | `PERINGKAT` | `[[kunci,label],…]` — kotak semak borang projek & carta aliran. Tiada = `PERINGKAT_LALAI`. |
+| `KATEGORI_BELANJA` | Senarai kategori perbelanjaan. Tiada = Material, Upah pekerja, Subkontraktor, Pengangkutan, Peralatan, Lain-lain. |
 
 **Jenama produk vs jenama pelanggan.** Logo Dyno (ikon PWA, favicon, `<title>` lalai)
 ialah jenama produk. Nama di sidebar ialah jenama pelanggan, dari `config.js`.
@@ -101,6 +102,27 @@ dua peringkat: `simpanProjek()` meminta pengesahan dan melakukan cascade
 `supabase.sql` menangkap apa-apa yang terlepas (baris `projek_id` null,
 suntingan terus melalui Table Editor).
 
+### `belanja`
+`id` · `projek_id` (FK cascade) · `kod` (FK ke `projek.kod`, update/delete cascade) ·
+`kategori` · `amaun` · `tarikh` · `penerima` · `nota` · `resit_path` ·
+`dicipta_oleh` (default `auth.email()`) · `diubah_oleh` · `created_at` · `updated_at`
+
+**Audit staf dikuatkuasa pelayan, bukan klien.** Klien TIDAK menghantar `dicipta_oleh`.
+Insert ditolak RLS jika `dicipta_oleh != auth.email()`; trigger `kunci_belanja()` mengunci
+`dicipta_oleh`/`created_at` semasa update dan mengisi `diubah_oleh`.
+
+Jadual ini ditambah selepas versi awal. `muatData()` sengaja **tidak** gagal jika jadual
+belum wujud — `BELANJA_RALAT` diisi dan tab Perbelanjaan memaparkan arahan jalankan
+semula `supabase.sql`. Jangan tukar kepada gagal keras.
+
+### Storan resit — bucket `resit` (private)
+Laluan: `<kod>/<masa>-<rawak>.<ext>`, disimpan dalam `belanja.resit_path`. Dibuka hanya
+melalui `createSignedUrl(…, 300)`. Gambar JPEG/PNG/WebP dikecilkan ke 1600px JPEG oleh
+`kecilkanGambar()` sebelum muat naik (3 MB → ~0.5 MB) supaya kuota percuma 1 GB bertahan.
+Fail lama dibuang bila resit diganti, bila rekod dipadam, dan bila projek dipadam
+(cuba-sahaja — rekod sudah tiada jika ia gagal). Salin `resit_path` lama **sebelum**
+sebarang `await` — objek dalam `DATA` boleh berubah semasa menunggu.
+
 ### `log_aktiviti`
 `id` · `pengguna` · `tindakan` · `butiran` · `created_at` — **insert & select sahaja**,
 tiada update/delete (dikuatkuasakan oleh RLS).
@@ -126,6 +148,16 @@ Deposit Payment = Σ bayaran WHERE jenis ~ /deposit|pendahuluan|advance/i AND st
 ```
 
 Invarian: **Total Payment = Total Received + Pending Payment**.
+
+### Baki terkini — `bakiBesar(id, kod)`
+```
+belanja(kod)        = Σ belanja WHERE kod = ?
+Baki terkini        = Σ diterima − Σ belanja          ← angka BESAR
+Untung kasar semasa = Σ nilai − Σ belanja
+```
+Dipapar di atas Dashboard (semua projek) dan di atas tab Perbelanjaan (ikut penapis
+projek). Negatif dipapar dengan tanda `−` dan pil amaran merah. `_BEL` (cache `belanjaKod()`)
+dibina bersama `_JUM` dalam `binaJumlah()`.
 
 ### Kategori status — `jenisStatus(s)`
 Padanan regex, terima BM **dan** Inggeris:
@@ -279,6 +311,8 @@ Siap dan diuji:
 - [x] Mod demo bila Supabase belum disambung
 - [x] Jenama pelanggan, awalan kod & peringkat kerja dari `config.js`
 - [x] Navigasi mudah alih (laci menu + butang back), kawasan selamat iOS
+- [x] Perbelanjaan projek — kategori, penerima, gambar resit, staf direkod oleh pelayan
+- [x] Kad BAKI TERKINI (duit masuk − perbelanjaan), keseluruhan & ikut projek
 
 Belum dibuat / idea seterusnya:
 
@@ -306,3 +340,5 @@ Bila mengubah logik pengiraan atau import, sekurang-kurangnya sahkan:
 5. Mod demo (config kosong) → tiada ralat konsol, butang tulis tersembunyi
 6. Tukar `SYARIKAT`, `KOD_AWALAN`, `PERINGKAT` dalam config → sidebar, kod baharu
    dan kotak semak semuanya ikut
+7. Rekod belanja dengan gambar besar → dimuat naik sebagai JPEG kecil, rekod tidak
+   menghantar `dicipta_oleh`; ganti resit → fail lama dibuang; baki terkini berubah

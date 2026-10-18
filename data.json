@@ -334,5 +334,194 @@
       "ruj": "TT260515",
       "status": "Diterima"
     }
+  ],
+  "belanja": [
+    {
+      "id": "bl-1",
+      "kod": "PRJ-01",
+      "kategori": "Material",
+      "amaun": 48200,
+      "tarikh": "2026-02-12",
+      "penerima": "KEDAI BINAAN CONTOH",
+      "nota": "Simen, bata, besi",
+      "resit_path": null,
+      "dicipta_oleh": "aisyah@syarikat.com"
+    },
+    {
+      "id": "bl-2",
+      "kod": "PRJ-01",
+      "kategori": "Upah pekerja",
+      "amaun": 36500,
+      "tarikh": "2026-03-30",
+      "penerima": "KUMPULAN PEKERJA A",
+      "nota": "Upah Feb–Mac",
+      "resit_path": null,
+      "dicipta_oleh": "hafiz@syarikat.com"
+    },
+    {
+      "id": "bl-3",
+      "kod": "PRJ-01",
+      "kategori": "Subkontraktor",
+      "amaun": 28000,
+      "tarikh": "2026-04-18",
+      "penerima": "SUBKON ELEKTRIK CONTOH",
+      "nota": "Pendawaian semula",
+      "resit_path": null,
+      "dicipta_oleh": "hafiz@syarikat.com"
+    },
+    {
+      "id": "bl-4",
+      "kod": "PRJ-02",
+      "kategori": "Material",
+      "amaun": 132000,
+      "tarikh": "2025-11-20",
+      "penerima": "PEMBEKAL CONTOH SDN BHD",
+      "nota": "Struktur & bumbung",
+      "resit_path": null,
+      "dicipta_oleh": "aisyah@syarikat.com"
+    },
+    {
+      "id": "bl-5",
+      "kod": "PRJ-02",
+      "kategori": "Upah pekerja",
+      "amaun": 98000,
+      "tarikh": "2026-03-15",
+      "penerima": "KUMPULAN PEKERJA A",
+      "nota": "",
+      "resit_path": null,
+      "dicipta_oleh": "hafiz@syarikat.com"
+    },
+    {
+      "id": "bl-6",
+      "kod": "PRJ-02",
+      "kategori": "Subkontraktor",
+      "amaun": 71500,
+      "tarikh": "2026-05-02",
+      "penerima": "SUBKON PAIP CONTOH",
+      "nota": "Paip & sanitari",
+      "resit_path": null,
+      "dicipta_oleh": "hafiz@syarikat.com"
+    },
+    {
+      "id": "bl-7",
+      "kod": "PRJ-02",
+      "kategori": "Pengangkutan",
+      "amaun": 6400,
+      "tarikh": "2026-01-08",
+      "penerima": "LORI SEWA CONTOH",
+      "nota": "",
+      "resit_path": null,
+      "dicipta_oleh": "zul@syarikat.com"
+    },
+    {
+      "id": "bl-8",
+      "kod": "PRJ-03",
+      "kategori": "Material",
+      "amaun": 214000,
+      "tarikh": "2026-04-20",
+      "penerima": "PEMBEKAL CONTOH SDN BHD",
+      "nota": "Konkrit & besi",
+      "resit_path": null,
+      "dicipta_oleh": "aisyah@syarikat.com"
+    },
+    {
+      "id": "bl-9",
+      "kod": "PRJ-03",
+      "kategori": "Peralatan",
+      "amaun": 38500,
+      "tarikh": "2026-05-05",
+      "penerima": "SEWA JENTERA CONTOH",
+      "nota": "Kren 3 minggu",
+      "resit_path": null,
+      "dicipta_oleh": "zul@syarikat.com"
+    },
+    {
+      "id": "bl-10",
+      "kod": "PRJ-03",
+      "kategori": "Upah pekerja",
+      "amaun": 126000,
+      "tarikh": "2026-07-31",
+      "penerima": "KUMPULAN PEKERJA B",
+      "nota": "Upah Apr–Jul",
+      "resit_path": null,
+      "dicipta_oleh": "hafiz@syarikat.com"
+    },
+    {
+      "id": "bl-11",
+      "kod": "PRJ-03",
+      "kategori": "Subkontraktor",
+      "amaun": 94000,
+      "tarikh": "2026-09-12",
+      "penerima": "SUBKON CERUCUK CONTOH",
+      "nota": "Cerucuk 48 batang",
+      "resit_path": null,
+      "dicipta_oleh": "hafiz@syarikat.com"
+    },
+    {
+      "id": "bl-12",
+      "kod": "PRJ-04",
+      "kategori": "Material",
+      "amaun": 31200,
+      "tarikh": "2026-06-25",
+      "penerima": "KEDAI BINAAN CONTOH",
+      "nota": "Kayu & genting",
+      "resit_path": null,
+      "dicipta_oleh": "aisyah@syarikat.com"
+    },
+    {
+      "id": "bl-13",
+      "kod": "PRJ-04",
+      "kategori": "Upah pekerja",
+      "amaun": 18600,
+      "tarikh": "2026-08-15",
+      "penerima": "KUMPULAN PEKERJA A",
+      "nota": "",
+      "resit_path": null,
+      "dicipta_oleh": "hafiz@syarikat.com"
+    },
+    {
+      "id": "bl-14",
+      "kod": "PRJ-05",
+      "kategori": "Material",
+      "amaun": 24800,
+      "tarikh": "2026-07-10",
+      "penerima": "KEDAI BINAAN CONTOH",
+      "nota": "Konkrit pracetak",
+      "resit_path": null,
+      "dicipta_oleh": "aisyah@syarikat.com"
+    },
+    {
+      "id": "bl-15",
+      "kod": "PRJ-05",
+      "kategori": "Peralatan",
+      "amaun": 9200,
+      "tarikh": "2026-07-14",
+      "penerima": "SEWA JENTERA CONTOH",
+      "nota": "Jengkaut 4 hari",
+      "resit_path": null,
+      "dicipta_oleh": "zul@syarikat.com"
+    },
+    {
+      "id": "bl-16",
+      "kod": "PRJ-07",
+      "kategori": "Material",
+      "amaun": 61000,
+      "tarikh": "2026-05-28",
+      "penerima": "PEMBEKAL CONTOH SDN BHD",
+      "nota": "Rangka keluli",
+      "resit_path": null,
+      "dicipta_oleh": "aisyah@syarikat.com"
+    },
+    {
+      "id": "bl-17",
+      "kod": "PRJ-07",
+      "kategori": "Lain-lain",
+      "amaun": 3800,
+      "tarikh": "2026-06-02",
+      "penerima": "MAJLIS CONTOH",
+      "nota": "Fi permit",
+      "resit_path": null,
+      "dicipta_oleh": "zul@syarikat.com"
+    }
   ]
 }

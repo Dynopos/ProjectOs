@@ -40,5 +40,8 @@ window.TETAPAN = {
     ["pemeriksaan", "Pemeriksaan"],
     ["serahan",     "Serahan"],
     ["baki",        "Bayaran akhir"]
-  ]
+  ],
+
+  // ---- Kategori perbelanjaan (tab Perbelanjaan) ----
+  KATEGORI_BELANJA: ["Material", "Upah pekerja", "Subkontraktor", "Pengangkutan", "Peralatan", "Lain-lain"]
 };

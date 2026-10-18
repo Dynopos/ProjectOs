@@ -110,6 +110,22 @@
 
   .view{display:none}.view.on{display:block}
 
+  /* Kad BAKI TERKINI — angka paling penting dalam sistem, jadi paling besar. */
+  .baki-besar{display:block;width:100%;text-align:left;font:inherit;border:0;cursor:pointer;
+    background:var(--hero-bg);color:var(--hero-ink);border-radius:var(--r);padding:22px 24px;margin:0 0 18px}
+  .baki-besar:hover{filter:brightness(1.06)}
+  .baki-besar .lab{font-size:12px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;color:var(--hero-ink2)}
+  .baki-besar .angka{font-family:var(--serif);font-size:clamp(40px,9vw,68px);font-weight:700;line-height:1.05;
+    letter-spacing:-.02em;margin:8px 0 4px;font-variant-numeric:tabular-nums;word-break:break-word}
+  .baki-besar .cap{font-size:13.5px;color:var(--hero-ink2)}
+  .baki-besar .awas{display:inline-block;background:var(--crit);color:#fff;
+    padding:3px 10px;border-radius:999px;font-weight:700;font-size:12.5px}
+  .baki-besar .pecah{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:16px;padding-top:14px;
+    border-top:1px solid color-mix(in srgb,var(--hero-ink) 22%,transparent)}
+  .baki-besar .pecah small{display:block;font-size:11.5px;color:var(--hero-ink2);margin-bottom:2px}
+  .baki-besar .pecah b{font-size:16px;font-variant-numeric:tabular-nums}
+  @media(max-width:820px){.baki-besar{padding:18px}.baki-besar .pecah{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
   /* Butang menu & tabir — hanya wujud pada lebar telefon. Sidebar TIDAK lagi
      disembunyikan di sana; ia jadi laci yang boleh ditarik keluar, supaya
      kesemua lapan destinasi (termasuk Import, Log, Terbitkan) kekal dicapai. */
@@ -301,6 +317,7 @@
     <a data-v="projek"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg> Projek <span class="badge" id="bg-projek">0</span></a>
     <a data-v="arkib"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="4" rx="1.5"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><path d="M10 12h4"/></svg> Projek Siap <span class="badge" id="bg-arkib">0</span></a>
     <a data-v="bayaran"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/></svg> Pembayaran <span class="badge" id="bg-bayaran">0</span></a>
+    <a data-v="belanja"><svg viewBox="0 0 24 24"><path d="M4 7a2 2 0 012-2h11v4"/><path d="M4 7v11a2 2 0 002 2h13V9H6a2 2 0 01-2-2z"/><circle cx="16" cy="14.5" r="1.3"/></svg> Perbelanjaan <span class="badge" id="bg-belanja">0</span></a>
     <a data-v="klien"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20a6.5 6.5 0 0113 0"/><path d="M16 5.5a3.2 3.2 0 010 5M17.5 20a6.6 6.6 0 00-2-4.7"/></svg> Klien</a>
     <div class="navlab" style="margin-top:16px">DATA</div>
     <a data-v="import"><svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L8 8m4-4l4 4"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg> Import Excel</a>
@@ -342,6 +359,8 @@
             <button class="btn p" onclick="pergi('projek')">Lihat semua projek</button>
           </div>
         </div>
+
+        <div id="baki-dash"></div>
 
         <div class="seclab"><b>Projek</b><span></span><small id="lab-projek"></small></div>
         <div class="tiles" id="tiles-projek"></div>
@@ -449,6 +468,24 @@
         </table></div>
       </section>
 
+      <!-- ---------- PERBELANJAAN ---------- -->
+      <section class="view" id="v-belanja">
+        <div class="head"><div><h1>Perbelanjaan</h1><p>Material, upah pekerja, subkontraktor dan kos lain — ikut projek.</p></div>
+          <div class="acts"><button class="btn" onclick="eksportBelanja()">⬇ Eksport CSV</button>
+            <button class="btn p" id="btn-tambah-belanja" onclick="bukaBelanja()">+ Rekod Belanja</button></div></div>
+        <div id="baki-belanja"></div>
+        <div class="flt">
+          <select id="f-bl-projek" onchange="render()"><option value="">Semua projek</option></select>
+          <select id="f-bl-kat" onchange="render()"><option value="">Semua kategori</option></select>
+        </div>
+        <div id="nota-belanja"></div>
+        <div class="tbl"><table>
+          <thead><tr><th>Tarikh</th><th>Projek</th><th>Kategori</th><th>Penerima</th><th>Resit</th><th>Direkod oleh</th><th class="num">Amaun (RM)</th><th></th></tr></thead>
+          <tbody id="tb-belanja"></tbody>
+          <tfoot id="tf-belanja"></tfoot>
+        </table></div>
+      </section>
+
       <!-- ---------- KLIEN ---------- -->
       <section class="view" id="v-klien">
         <div class="head"><div><h1>Klien</h1><p>Senarai kontak dan baki setiap klien.</p></div>
@@ -523,6 +560,27 @@
 </form></div>
 
 <!-- ===== MODAL BAYARAN ===== -->
+<div class="modal" id="m-belanja"><form class="box" onsubmit="simpanBelanja(event)">
+  <h3 id="mbl-tajuk">Rekod perbelanjaan</h3><p class="sub">Nama anda direkod secara automatik.</p>
+  <input type="hidden" id="mbl-id">
+  <div class="g2">
+    <div class="full"><label>Projek *</label><select class="field" id="mbl-kod" required></select></div>
+    <div><label>Kategori *</label><select class="field" id="mbl-kategori" required></select></div>
+    <div><label>Amaun (RM) *</label><input class="field" id="mbl-amaun" type="number" min="0" step="0.01" required></div>
+    <div><label>Tarikh *</label><input class="field" id="mbl-tarikh" type="date" required></div>
+    <div><label>Penerima bayaran *</label><input class="field" id="mbl-penerima" required placeholder="Kedai / pekerja / subkon"></div>
+    <div class="full"><label>Nota</label><input class="field" id="mbl-nota" placeholder="cth 120 kampit simen"></div>
+    <div class="full"><label>Gambar resit</label>
+      <input class="field" id="mbl-resit" type="file" accept="image/*,application/pdf" capture="environment">
+      <small id="mbl-resit-ada" style="display:block;margin-top:6px;color:var(--muted)"></small></div>
+  </div>
+  <div class="mact">
+    <button type="button" class="btn bahaya kiri" id="mbl-padam" style="display:none" onclick="padamBelanja()">Padam</button>
+    <button type="button" class="btn" onclick="tutupModal()">Batal</button>
+    <button class="btn p" id="mbl-simpan">Simpan</button>
+  </div>
+</form></div>
+
 <div class="modal" id="m-bayaran"><form class="box" onsubmit="simpanBayaran(event)">
   <h3 id="mb-tajuk">Rekod bayaran</h3><p class="sub">Deposit, bayaran progres, atau baki akhir.</p>
   <input type="hidden" id="mb-id">
@@ -552,7 +610,8 @@
 <script src="./xlsx.min.js"></script>
 <script>
 /* ================= KEADAAN ================= */
-let DATA = { meta:{tajuk:"Dyno Project OS", dikemaskini:"", oleh:""}, projek:[], bayaran:[] };
+let DATA = { meta:{tajuk:"Dyno Project OS", dikemaskini:"", oleh:""}, projek:[], bayaran:[], belanja:[] };
+let BELANJA_RALAT = "";
 const BULAN=["Jan","Feb","Mac","Apr","Mei","Jun","Jul","Ogo","Sep","Okt","Nov","Dis"];
 const STATUS=["Baru","Dalam Progres","Siap","Tertunda"];
 
@@ -571,14 +630,19 @@ const slug= s => String(s||"").toLowerCase().replace(/[^a-z]/g,"");
 /* Cache jumlah diterima — dibina sekali setiap render(), bukan diimbas semula
    setiap panggilan. Tanpa ini render() ialah O(projek² × bayaran). */
 let _JUM=null;
+let _BEL=null;
 function binaJumlah(){
-  _JUM=new Map();
+  _JUM=new Map(); _BEL=new Map();
   for(const b of DATA.bayaran){
     if(b.status==="Menunggu") continue;
     _JUM.set(b.kod,(_JUM.get(b.kod)||0)+(+b.amaun||0));
   }
+  for(const x of (DATA.belanja||[])) _BEL.set(x.kod,(_BEL.get(x.kod)||0)+(+x.amaun||0));
 }
 const terima = kod => { if(!_JUM) binaJumlah(); return _JUM.get(kod)||0; };
+const belanjaKod = kod => { if(!_BEL) binaJumlah(); return _BEL.get(kod)||0; };
+const rmT = n => (n<0?"−":"")+rm(Math.abs(n));
+const namaEmel = e => String(e||"").split("@")[0].replace(/[._-]+/g," ").replace(/\b\w/g,c=>c.toUpperCase())||"—";
 const inisial= s => String(s||"?").trim().split(/\s+/).slice(0,2).map(w=>w[0]).join("").toUpperCase();
 
 /* Kategori status — faham Bahasa Melayu & Inggeris */
@@ -649,7 +713,7 @@ async function mula(){
   }
   if(!ADA_SB){                      // MOD DEMO — baca data.json sahaja
     document.getElementById("shell").style.display="flex";
-    document.querySelectorAll("#btn-tambah-projek,#btn-tambah-bayaran").forEach(b=>b.style.display="none");
+    document.querySelectorAll("#btn-tambah-projek,#btn-tambah-bayaran,#btn-tambah-belanja").forEach(b=>b.style.display="none");
     return muatData();
   }
   const {data}=await SB.auth.getSession();
@@ -696,10 +760,14 @@ async function masukApp(){
 /* ================= MUAT DATA ================= */
 async function muatData(paksa){
   if(SB && SESI){
-    const [pr,by] = await Promise.all([
+    const [pr,by,bl] = await Promise.all([
       SB.from("projek").select("*").order("kod"),
-      SB.from("bayaran").select("*").order("tarikh",{ascending:false})
+      SB.from("bayaran").select("*").order("tarikh",{ascending:false}),
+      SB.from("belanja").select("*").order("tarikh",{ascending:false})
     ]);
+    // Jadual belanja ditambah kemudian — pelanggan lama mungkin belum jalankan
+    // semula supabase.sql. Jangan biar itu menjatuhkan seluruh app.
+    BELANJA_RALAT = bl.error ? (bl.error.message||"ralat") : "";
     if(pr.error||by.error){
       const m=(pr.error||by.error).message||"";
       alert("Tak dapat baca data.\n\n"+m+"\n\n"+(
@@ -712,7 +780,7 @@ async function muatData(paksa){
     }
     DATA={meta:{tajuk:T.SYARIKAT||"Dyno Project OS", jabatan:T.JABATAN||"",
       dikemaskini:new Date().toISOString().slice(0,10), oleh:sayaNama()},
-      projek:pr.data||[], bayaran:by.data||[]};
+      projek:pr.data||[], bayaran:by.data||[], belanja:bl.error?[]:(bl.data||[])};
     if(document.getElementById("v-log").classList.contains("on")) muatLog();
   }else{
     try{
@@ -724,6 +792,7 @@ async function muatData(paksa){
   siap();
 }
 function siap(){
+  if(!Array.isArray(DATA.belanja)) DATA.belanja=[];
   document.getElementById("me-nama").textContent = SESI ? sayaNama() : (DATA.meta.oleh||"Top Management");
   document.getElementById("me-emel").innerHTML = SB&&SESI
     ? `<span class="status-sambung"><i></i>${esc(sayaEmel())}</span>`
@@ -748,6 +817,7 @@ function langganRealtime(){
   SB.channel("dyno-perubahan")
     .on("postgres_changes",{event:"*",schema:"public",table:"projek"},segarSemula)
     .on("postgres_changes",{event:"*",schema:"public",table:"bayaran"},segarSemula)
+    .on("postgres_changes",{event:"*",schema:"public",table:"belanja"},segarSemula)
     .subscribe();
 }
 let tempoh=null;
@@ -957,9 +1027,12 @@ async function padamProjek(){
   const id=document.getElementById("mp-id").value;
   const p=DATA.projek.find(x=>x.id===id); if(!p) return;
   const n=DATA.bayaran.filter(b=>b.kod===p.kod).length;
-  if(!confirm(`Padam projek ${p.kod} — ${p.nama}?\n\n${n} rekod bayaran akan turut dipadam. Tindakan ini tak boleh diundur.`)) return;
+  const bl=DATA.belanja.filter(x=>x.kod===p.kod);
+  if(!confirm(`Padam projek ${p.kod} — ${p.nama}?\n\n${n} rekod bayaran dan ${bl.length} rekod perbelanjaan akan turut dipadam. Tindakan ini tak boleh diundur.`)) return;
   const {error}=await SB.from("projek").delete().eq("id",id);
   if(error) return alert(error.message);
+  const resit=bl.map(x=>x.resit_path).filter(Boolean);
+  if(resit.length) await SB.storage.from("resit").remove(resit);   // cuba sahaja; rekod sudah tiada
   await catat("Padam projek", `${p.kod} — ${p.nama}`);
   tutupModal(); await muatData();
 }
@@ -1026,11 +1099,161 @@ async function padamBayaran(){
   await catat("Padam bayaran", `${b.kod} — ${rm(b.amaun)}`);
   tutupModal(); await muatData();
 }
+/* ================= PERBELANJAAN ================= */
+const KATEGORI_BELANJA=(Array.isArray(T.KATEGORI_BELANJA)&&T.KATEGORI_BELANJA.length)?T.KATEGORI_BELANJA
+  :["Material","Upah pekerja","Subkontraktor","Pengangkutan","Peralatan","Lain-lain"];
+
+/* Baki terkini = duit masuk (bayaran Diterima) − perbelanjaan. kod=null → semua projek. */
+function bakiBesar(id,kod){
+  const el=document.getElementById(id); if(!el) return;
+  const P=kod?DATA.projek.filter(p=>p.kod===kod):DATA.projek;
+  const nilai=P.reduce((s,p)=>s+(+p.nilai||0),0);
+  const masuk=P.reduce((s,p)=>s+terima(p.kod),0);
+  const keluar=P.reduce((s,p)=>s+belanjaKod(p.kod),0);
+  const baki=masuk-keluar, p=kod?P[0]:null;
+  el.innerHTML=`<button class="baki-besar" type="button" onclick="pergi('belanja')" title="Lihat perbelanjaan">
+    <div class="lab">Baki terkini · ${p?`${esc(p.kod)} — ${esc(p.nama)}`:"semua projek"}</div>
+    <div class="angka">${rmT(baki)}</div>
+    <div class="cap">${baki<0?'<span class="awas">Perbelanjaan melebihi duit masuk</span>':"Duit masuk − perbelanjaan"}</div>
+    <div class="pecah">
+      <div><small>Duit masuk</small><b>${rm(masuk)}</b></div>
+      <div><small>Perbelanjaan</small><b>${rm(keluar)}</b></div>
+      <div><small>Belum dikutip</small><b>${rm(Math.max(0,nilai-masuk))}</b></div>
+      <div><small>Untung kasar semasa</small><b>${rmT(nilai-keluar)}</b></div>
+    </div></button>`;
+}
+function jadualBelanja(){
+  const fp=document.getElementById("f-bl-projek").value, fk=document.getElementById("f-bl-kat").value;
+  bakiBesar("baki-belanja", fp||null);
+  document.getElementById("nota-belanja").innerHTML = BELANJA_RALAT
+    ? `<div class="note warn" style="margin:0 0 14px"><b>Jadual perbelanjaan belum wujud dalam pangkalan data.</b>
+        Jalankan semula <code>supabase.sql</code> dalam Supabase SQL Editor. <small>(${esc(BELANJA_RALAT)})</small></div>` : "";
+  const rows=DATA.belanja.filter(x=>(!fp||x.kod===fp)&&(!fk||x.kategori===fk))
+    .sort((a,b)=>String(b.tarikh||"").localeCompare(String(a.tarikh||"")));
+  document.getElementById("tb-belanja").innerHTML=rows.map(x=>{
+    const p=DATA.projek.find(q=>q.kod===x.kod)||{};
+    return `<tr><td>${esc(x.tarikh||"—")}</td>
+      <td><b>${esc(x.kod)}</b><br><small style="color:var(--muted)">${esc(p.nama||"")}</small></td>
+      <td><span class="tag">${esc(x.kategori||"—")}</span></td>
+      <td>${esc(x.penerima||"—")}${x.nota?`<br><small style="color:var(--muted)">${esc(x.nota)}</small>`:""}</td>
+      <td>${x.resit_path?(SB&&SESI?`<button class="btn sm" onclick="lihatResit('${escJS(x.resit_path)}')">📎 Lihat</button>`:"📎"):"—"}</td>
+      <td><small>${esc(namaEmel(x.dicipta_oleh))}</small></td>
+      <td class="num"><b>${rm(x.amaun)}</b></td>
+      <td><div class="rowact">${bolehTulis()?`<button class="mini" title="Kemas kini" onclick="bukaBelanja('${escJS(x.id)}')"><svg viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 10-4-4L4 16z"/></svg></button>`:""}</div></td></tr>`;
+  }).join("") || `<tr><td colspan="8" class="empty">${DATA.belanja.length?"Tiada rekod padan.":"Belum ada perbelanjaan direkod."}</td></tr>`;
+  const t=rows.reduce((s,x)=>s+(+x.amaun||0),0);
+  document.getElementById("tf-belanja").innerHTML=rows.length?`<tr style="background:var(--hover);font-weight:700">
+    <td colspan="6" style="padding:13px 16px">JUMLAH · ${rows.length} rekod</td><td class="num">${rm(t)}</td><td></td></tr>`:"";
+}
+function bukaBelanja(id){
+  if(!bolehTulis()) return perluLogMasuk();
+  if(!DATA.projek.length) return alert("Tambah projek dahulu sebelum merekod perbelanjaan.");
+  if(BELANJA_RALAT) return alert("Jadual perbelanjaan belum wujud. Jalankan semula supabase.sql dalam Supabase SQL Editor.");
+  const x = id ? DATA.belanja.find(q=>q.id===id) : null;
+  document.getElementById("mbl-tajuk").textContent = x?"Kemas kini perbelanjaan":"Rekod perbelanjaan";
+  document.getElementById("mbl-id").value = x?x.id:"";
+  const kodEl=document.getElementById("mbl-kod");
+  kodEl.innerHTML=DATA.projek.map(p=>`<option value="${esc(p.kod)}">${esc(p.kod)} — ${esc(p.nama)}</option>`).join("");
+  kodEl.value = x?x.kod:(document.getElementById("f-bl-projek").value||DATA.projek[0].kod);
+  const katEl=document.getElementById("mbl-kategori");
+  katEl.innerHTML=KATEGORI_BELANJA.map(k=>`<option>${esc(k)}</option>`).join("");
+  pilihNilai(katEl, x?(x.kategori||KATEGORI_BELANJA[0]):KATEGORI_BELANJA[0]);
+  document.getElementById("mbl-amaun").value    = x?x.amaun:"";
+  document.getElementById("mbl-tarikh").value   = x?(x.tarikh||""):new Date().toISOString().slice(0,10);
+  document.getElementById("mbl-penerima").value = x?(x.penerima||""):"";
+  document.getElementById("mbl-nota").value     = x?(x.nota||""):"";
+  document.getElementById("mbl-resit").value    = "";
+  document.getElementById("mbl-resit-ada").innerHTML = x&&x.resit_path
+    ? `Resit sedia ada: <a href="#" onclick="lihatResit('${escJS(x.resit_path)}');return false" style="color:var(--gold)">lihat</a> · pilih fail baharu untuk menggantikannya`
+    : (x?`Direkod oleh ${esc(namaEmel(x.dicipta_oleh))}`:"Ambil gambar terus dari kamera telefon, atau pilih fail.");
+  document.getElementById("mbl-padam").style.display = x?"inline-flex":"none";
+  document.getElementById("m-belanja").classList.add("on");
+}
+/* Gambar telefon 3–5 MB; kecilkan ke 1600px JPEG sebelum muat naik supaya storan
+   percuma Supabase (1 GB) bertahan. PDF & HEIC dihantar seadanya. */
+async function kecilkanGambar(f){
+  if(!/^image\/(jpeg|png|webp)$/.test(f.type)) return f;
+  try{
+    const img=await createImageBitmap(f), m=1600, k=Math.min(1,m/Math.max(img.width,img.height));
+    if(k===1 && f.size<1.5e6) return f;
+    const c=document.createElement("canvas"); c.width=Math.round(img.width*k); c.height=Math.round(img.height*k);
+    c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+    const blob=await new Promise(res=>c.toBlob(res,"image/jpeg",.82));
+    return blob ? new File([blob], f.name.replace(/\.[^.]+$/,"")+".jpg", {type:"image/jpeg"}) : f;
+  }catch(e){ return f; }
+}
+async function simpanBelanja(e){
+  e.preventDefault();
+  const btn=document.getElementById("mbl-simpan"); btn.disabled=true; btn.textContent="Menyimpan…";
+  const siapBtn=()=>{ btn.disabled=false; btn.textContent="Simpan"; };
+  const id=document.getElementById("mbl-id").value;
+  const kod=document.getElementById("mbl-kod").value;
+  const pr=DATA.projek.find(p=>p.kod===kod), lama=id?DATA.belanja.find(x=>x.id===id):null;
+  const resitLama = lama ? lama.resit_path : null;   // salin sekarang — objek boleh berubah semasa await
+  // dicipta_oleh TIDAK dihantar — pelayan isi dari auth.email() dan trigger menguncinya.
+  const rec={projek_id:pr?pr.id:null, kod,
+    kategori:document.getElementById("mbl-kategori").value,
+    amaun:+document.getElementById("mbl-amaun").value||0,
+    tarikh:document.getElementById("mbl-tarikh").value||null,
+    penerima:document.getElementById("mbl-penerima").value.trim(),
+    nota:document.getElementById("mbl-nota").value.trim()};
+  let fail=document.getElementById("mbl-resit").files[0], baru=null;
+  if(fail){
+    btn.textContent="Memuat naik resit…";
+    fail=await kecilkanGambar(fail);
+    const ext=((fail.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,""))||"jpg";
+    baru=`${kod.replace(/[^\w-]/g,"_")}/${Date.now()}-${Math.random().toString(36).slice(2,8)}.${ext}`;
+    const up=await SB.storage.from("resit").upload(baru, fail, {contentType:fail.type||undefined, upsert:false});
+    if(up.error){ siapBtn(); return alert("Resit gagal dimuat naik: "+up.error.message+
+      (/bucket|not found/i.test(up.error.message)?"\n\nStoran resit belum wujud — jalankan semula supabase.sql.":"")); }
+    rec.resit_path=baru;
+  }
+  const res = id ? await SB.from("belanja").update(rec).eq("id",id) : await SB.from("belanja").insert(rec);
+  if(res.error){
+    if(baru) await SB.storage.from("resit").remove([baru]);     // jangan tinggalkan fail yatim
+    siapBtn(); return alert(res.error.message);
+  }
+  if(baru && resitLama && resitLama!==baru) await SB.storage.from("resit").remove([resitLama]);
+  await catat(id?"Kemas kini perbelanjaan":"Rekod perbelanjaan", `${kod} — ${rec.kategori} ${rm(rec.amaun)} (${rec.penerima})`);
+  siapBtn(); tutupModal(); await muatData();
+}
+async function padamBelanja(){
+  const id=document.getElementById("mbl-id").value;
+  const x=DATA.belanja.find(q=>q.id===id); if(!x) return;
+  if(!confirm(`Padam perbelanjaan ${rm(x.amaun)} (${x.kod} — ${x.kategori})?`)) return;
+  const {error}=await SB.from("belanja").delete().eq("id",id);
+  if(error) return alert(error.message);
+  if(x.resit_path) await SB.storage.from("resit").remove([x.resit_path]);
+  await catat("Padam perbelanjaan", `${x.kod} — ${x.kategori} ${rm(x.amaun)}`);
+  tutupModal(); await muatData();
+}
+async function lihatResit(laluan){
+  if(!SB||!SESI) return;
+  const w=window.open("","_blank");          // buka serta-merta supaya tak disekat penyekat pop-up
+  const {data,error}=await SB.storage.from("resit").createSignedUrl(laluan, 300);
+  if(error){ if(w) w.close(); return alert("Resit tak dapat dibuka: "+error.message); }
+  if(w) w.location=data.signedUrl; else location.href=data.signedUrl;
+}
+function eksportBelanja(){
+  const b=[["Tarikh","Kod","Projek","Kategori","Penerima","Nota","Amaun","Direkod oleh"]]
+    .concat(DATA.belanja.map(x=>{const p=DATA.projek.find(q=>q.kod===x.kod)||{};
+      return [x.tarikh||"",x.kod,p.nama||"",x.kategori||"",x.penerima||"",x.nota||"",+x.amaun||0,x.dicipta_oleh||""];}));
+  muatTurun("perbelanjaan.csv","\ufeff"+b.map(r=>r.map(c=>`"${String(c??"").replace(/"/g,'""')}"`).join(",")).join("\n"),"text/csv");
+}
+
 function tutupModal(){ document.querySelectorAll(".modal").forEach(m=>m.classList.remove("on")); }
 document.addEventListener("click",e=>{ if(e.target.classList.contains("modal")) tutupModal(); });
 document.addEventListener("keydown",e=>{ if(e.key==="Escape") tutupModal(); });
 
 function isiPilihan(){
+  const blp=document.getElementById("f-bl-projek"), blpLama=blp.value;
+  blp.innerHTML=`<option value="">Semua projek</option>`+DATA.projek.map(p=>`<option value="${esc(p.kod)}">${esc(p.kod)} — ${esc(p.nama)}</option>`).join("");
+  if(DATA.projek.some(p=>p.kod===blpLama)) blp.value=blpLama;
+  const blk=document.getElementById("f-bl-kat"), blkLama=blk.value;
+  const kats=[...new Set(KATEGORI_BELANJA.concat(DATA.belanja.map(x=>x.kategori).filter(Boolean)))];
+  blk.innerHTML=`<option value="">Semua kategori</option>`+kats.map(k=>`<option>${esc(k)}</option>`).join("");
+  if(kats.includes(blkLama)) blk.value=blkLama;
+  document.getElementById("bg-belanja").textContent=DATA.belanja.length;
   const thn=[...new Set(DATA.bayaran.map(b=>String(b.tarikh||"").slice(0,4)).filter(x=>/^\d{4}$/.test(x)))].sort().reverse();
   const s=document.getElementById("thn"); const lama=s.value;
   s.innerHTML=(thn.length?thn:[String(new Date().getFullYear())]).map(y=>`<option>${y}</option>`).join("");
@@ -1050,6 +1273,7 @@ function isiPilihan(){
 /* ================= RENDER ================= */
 function render(){
   binaJumlah();
+  bakiBesar("baki-dash", null);
   const P=DATA.projek, B=DATA.bayaran;
   const nilai=P.reduce((s,p)=>s+(+p.nilai||0),0);
   const kutip=P.reduce((s,p)=>s+terima(p.kod),0);
@@ -1129,7 +1353,7 @@ function render(){
       .map(([k,d])=>({l:k.slice(0,18),sub:"",v:d.n})), v=>v+" projek");
   }
 
-  jadualProjek(); jadualArkib(); jadualBayaran(); jadualKlien();
+  jadualProjek(); jadualArkib(); jadualBayaran(); jadualKlien(); jadualBelanja();
 }
 
 function jadualProjek(){
