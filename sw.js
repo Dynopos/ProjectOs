@@ -5,7 +5,7 @@
    · lain-lain  → CACHE-FIRST    (buka pantas, boleh guna offline)
    Naikkan VERSI setiap kali index.html diubah supaya cache lama dibuang. */
 
-const VERSI = "dyno-v4";
+const VERSI = "dyno-v5";
 const TERAS = [
   "./",
   "./index.html",
