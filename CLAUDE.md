@@ -251,6 +251,18 @@ Warna carta disahkan terhadap semakan kontras/CVD:
 Emas terang (`#d4a437`) hanya untuk **krom UI** (logo, butang, sempadan),
 bukan untuk tanda carta — ia gagal jalur kecerahan mod gelap.
 
+**Biru (dari logo Dyno) ialah aksen kedua**, dengan peranan berbeza daripada emas:
+
+| Warna | Maksud | Dipakai pada |
+|---|---|---|
+| Emas `--gold`/`--brand` | Wang & tindakan utama | Kad Baki Terkini, kotak dashboard, butang utama, carta kutipan |
+| Biru `--biru` | Kemajuan kerja, maklumat, interaksi | Status berjalan, carta aliran kerja, nota maklumat, fokus medan, pautan telefon, cincin logo |
+| Kelabu `--tag-neutral` | Belum bermula | Status Baru / pending |
+| Merah `--tag-red` | Masalah | Status Tertunda |
+
+Gelap `--biru: #5b9bf5`, cerah `#1f5fc7`. Lencana status disemak ≥ 6:1 kontras dalam
+kedua-dua tema. Jangan guna biru untuk angka wang — pembaca akan menyangka ia jenis wang lain.
+
 Carta ialah SVG buatan tangan (`cartaBar`, `cartaBaris`, `gauge`) —
 satu siri, satu warna, corak *hatch* untuk "tiada data". Tiada pustaka carta.
 

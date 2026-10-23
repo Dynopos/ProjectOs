@@ -28,6 +28,9 @@
     --hatch:#201e18; --hatch-line:#3b372c; --track:#201e18;
     --good:#4fbe6a; --warn:#e0a012; --crit:#e06a6a;
     --tag-blue:#7fb0e0; --tag-blue-bg:rgba(127,176,224,.13);
+    /* Biru dari logo Dyno: kemajuan kerja, maklumat, interaksi. Emas kekal untuk wang. */
+    --biru:#5b9bf5; --biru-soft:rgba(91,155,245,.14); --biru-deep:#2f6fd6;
+    --tag-neutral:#b6ae9c; --tag-neutral-bg:rgba(182,174,156,.12);
     --tag-amber:#e0b45c; --tag-amber-bg:rgba(224,180,92,.13);
     --tag-gold:#d4a437; --tag-gold-bg:rgba(212,164,55,.14);
     --tag-red:#e08585; --tag-red-bg:rgba(224,133,133,.13);
@@ -48,6 +51,8 @@
     --hatch:#f2f0ea; --hatch-line:#d8d2c2; --track:#f0ede5;
     --good:#0ca30c; --warn:#b8860b; --crit:#c23b3b;
     --tag-blue:#1c6fb8; --tag-blue-bg:#eaf2fb;
+    --biru:#1f5fc7; --biru-soft:#e8f0fc; --biru-deep:#174a9c;
+    --tag-neutral:#5c584c; --tag-neutral-bg:#efece5;
     --tag-amber:#8a6510; --tag-amber-bg:#faf1dc;
     --tag-gold:#7d5c0e; --tag-gold-bg:#f6f0dd;
     --tag-red:#a32b2b; --tag-red-bg:#fbecec;
@@ -70,7 +75,7 @@
   .logo em{font-style:normal;color:var(--gold)}
   .logo small{display:block;font-family:var(--font);font-size:9.5px;letter-spacing:.14em;color:var(--muted);font-weight:600;margin-top:3px;text-transform:uppercase}
   h1{font-family:var(--serif);letter-spacing:0}
-  .logo i{width:34px;height:34px;border-radius:7px;background:var(--hero-bg);display:grid;place-items:center;color:var(--hero-ink);font-size:13px;font-style:normal;font-weight:800;font-family:var(--serif);letter-spacing:.02em;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+  .logo i{width:34px;height:34px;border-radius:7px;background:var(--hero-bg);display:grid;place-items:center;color:var(--hero-ink);font-size:13px;font-style:normal;font-weight:800;font-family:var(--serif);letter-spacing:.02em;box-shadow:inset 0 0 0 2px var(--biru)}
   .navlab{font-size:10.5px;letter-spacing:.1em;color:var(--muted);font-weight:600;padding:0 10px;margin:6px 0 8px}
   .side a{display:flex;align-items:center;gap:11px;padding:9px 10px;border-radius:11px;color:var(--ink2);text-decoration:none;font-weight:500;cursor:pointer;position:relative;margin-bottom:1px;font-size:14px}
   .side a svg{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.7}
@@ -88,7 +93,7 @@
   .topbar{display:flex;align-items:center;gap:14px;padding:16px 26px;border-bottom:1px solid var(--line)}
   .search{flex:1;max-width:400px;position:relative}
   .search input{width:100%;background:var(--field);border:1px solid transparent;border-radius:12px;padding:9px 14px 9px 38px;outline:none}
-  .search input:focus{border-color:var(--brand-mid);background:var(--card)}
+  .search input:focus{border-color:var(--biru);background:var(--card)}
   .search svg{position:absolute;left:13px;top:10px;width:16px;height:16px;stroke:var(--muted);fill:none;stroke-width:1.9}
   .me{margin-left:auto;display:flex;align-items:center;gap:10px}
   .av{width:36px;height:36px;border-radius:50%;background:var(--hero-bg);color:var(--hero-ink);display:grid;place-items:center;font-weight:700;font-size:13px}
@@ -185,11 +190,11 @@
   /* Jaring keselamatan dari jenisStatus() — tangkap status bebas yang tiada
      dalam senarai slug di bawah (Aktif, WIP, Active, Closed, Handover…).
      Diisytihar SEBELUM .t-* supaya padanan tepat sentiasa menang. */
-  .k-pending{color:var(--tag-blue);background:var(--tag-blue-bg)}
-  .k-jalan{color:var(--tag-amber);background:var(--tag-amber-bg)}
+  .k-pending{color:var(--tag-neutral);background:var(--tag-neutral-bg)}
+  .k-jalan{color:var(--biru);background:var(--biru-soft)}
   .k-siap{color:var(--tag-gold);background:var(--tag-gold-bg)}
-  .t-baru,.t-new{color:var(--tag-blue);background:var(--tag-blue-bg)}
-  .t-progres,.t-dalamprogres,.t-dalamprogress,.t-ongoing,.t-running,.t-berjalan{color:var(--tag-amber);background:var(--tag-amber-bg)}
+  .t-baru,.t-new{color:var(--tag-neutral);background:var(--tag-neutral-bg)}
+  .t-progres,.t-dalamprogres,.t-dalamprogress,.t-ongoing,.t-running,.t-berjalan{color:var(--biru);background:var(--biru-soft)}
   .t-siap,.t-selesai,.t-completed,.t-complete,.t-done,.t-ended{color:var(--tag-gold);background:var(--tag-gold-bg)}
   .t-tertunda,.t-pending,.t-tangguh{color:var(--tag-red);background:var(--tag-red-bg)}
   .t-menunggu{color:var(--tag-amber);background:var(--tag-amber-bg)}
@@ -219,7 +224,7 @@
   .drop:hover,.drop.hot{border-color:var(--gold);background:var(--brand-soft)}
   .drop b{display:block;font-size:15px;margin-bottom:4px}
   .drop span{color:var(--muted)}
-  .note{background:var(--brand-soft);border-radius:14px;padding:14px 16px;font-size:13px;color:var(--ink2);margin:14px 0;border-left:3px solid var(--gold)}
+  .note{background:var(--biru-soft);border-radius:14px;padding:14px 16px;font-size:13px;color:var(--ink2);margin:14px 0;border-left:3px solid var(--biru)}
   .note.warn{background:var(--tag-amber-bg);color:var(--tag-amber);border-left-color:var(--warn)}
   code{background:var(--field);padding:1px 6px;border-radius:5px;font-size:12.5px;font-family:ui-monospace,monospace}
   .steps{counter-reset:s;list-style:none;padding:0;margin:0}
@@ -238,7 +243,7 @@
   .gatebox{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:30px;width:100%;max-width:390px;box-shadow:var(--shadow)}
   .gatebox label{display:block;font-size:12.5px;color:var(--ink2);margin:15px 0 6px}
   .field{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:var(--field);outline:none;color:var(--ink)}
-  .field:focus{border-color:var(--gold)}
+  .field:focus{border-color:var(--biru);box-shadow:0 0 0 3px var(--biru-soft)}
   .hint{font-size:12px;color:var(--muted);margin:16px 0 0;text-align:center}
   .ralat{background:var(--tag-red-bg);color:var(--tag-red);border-radius:10px;padding:10px 12px;font-size:13px;margin-top:14px}
   .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:150;padding:18px}
@@ -1345,7 +1350,7 @@ function render(){
   const adaAliran=P.some(p=>p.aliran);
   if(adaAliran){
     cartaBaris("c-aliran",PERINGKAT.map(([k,l])=>({l,sub:"",v:P.filter(p=>p.aliran&&p.aliran[k]).length})),
-      v=>`${v}/${P.length}`);
+      v=>`${v}/${P.length}`, "--biru");
   }else{
     const pics={};
     P.forEach(p=>{const k=p.pic||p.lokasi||"Tidak ditetapkan"; pics[k]=pics[k]||{n:0,v:0}; pics[k].n++; pics[k].v+=(+p.nilai||0);});
@@ -1381,7 +1386,7 @@ function jadualProjek(){
     const tel=String(p.telefon||"").trim();
     return `<tr><td><b>${esc(p.kod)}</b>${p.inv?`<br><small style="color:var(--muted)">${esc(p.inv)}</small>`:""}</td>
       <td class="wnama"><b>${esc(p.nama)}</b></td><td>${esc(p.lokasi||"—")}</td>
-      <td>${tel?`<a href="tel:${esc(tel.replace(/\s/g,""))}" style="color:var(--gold);text-decoration:none">${esc(tel)}</a>`:"—"}</td>
+      <td>${tel?`<a href="tel:${esc(tel.replace(/\s/g,""))}" style="color:var(--biru);text-decoration:none">${esc(tel)}</a>`:"—"}</td>
       <td><span class="tag k-${jenisStatus(p.status)} t-${slug(p.status)}"><i></i>${esc(p.status||"—")}</span></td>
       <td class="num">${rm(n)}</td><td class="num">${rm(d)}</td>
       <td class="num" style="${bk<=0?"color:var(--gold);font-weight:600":""}">${rm(bk)}</td>
@@ -1425,7 +1430,7 @@ function jadualArkib(){
     const d=terima(p.kod), n=+p.nilai||0, bk=n-d, tel=String(p.telefon||"").trim();
     return `<tr><td><b>${esc(p.kod)}</b>${p.inv?`<br><small style="color:var(--muted)">${esc(p.inv)}</small>`:""}</td>
       <td class="wnama"><b>${esc(p.nama)}</b></td><td>${esc(p.lokasi||"—")}</td>
-      <td>${tel?`<a href="tel:${esc(tel.replace(/\s/g,""))}" style="color:var(--gold);text-decoration:none">${esc(tel)}</a>`:"—"}</td>
+      <td>${tel?`<a href="tel:${esc(tel.replace(/\s/g,""))}" style="color:var(--biru);text-decoration:none">${esc(tel)}</a>`:"—"}</td>
       <td>${esc(thnProjek(p)||"—")}</td>
       <td class="num">${rm(n)}</td><td class="num">${rm(d)}</td>
       <td class="num" style="${bk<=0?"color:var(--gold);font-weight:600":"color:var(--tag-red)"}">${rm(bk)}</td>
@@ -1477,7 +1482,7 @@ function jadualKlien(){
     const pc=d.v?Math.min(100,Math.round(d.t/d.v*100)):0;
     const tel=String(d.tel||"").trim();
     return `<tr><td><b>${esc(c)}</b></td><td>${esc(d.lokasi||"—")}</td>
-      <td>${tel?`<a href="tel:${esc(tel.replace(/\s/g,""))}" style="color:var(--gold);text-decoration:none">${esc(tel)}</a>`:"—"}</td>
+      <td>${tel?`<a href="tel:${esc(tel.replace(/\s/g,""))}" style="color:var(--biru);text-decoration:none">${esc(tel)}</a>`:"—"}</td>
       <td class="num">${d.n}</td><td class="num">${rm(d.v)}</td>
       <td class="num">${rm(d.t)}</td><td class="num">${rm(d.v-d.t)}</td>
       <td><div class="prog"><div class="b"><i style="width:${pc}%"></i></div><small>${pc}%</small></div></td></tr>`;
@@ -1525,10 +1530,10 @@ function cartaBar(id,data){
       ${g}${b}</svg>`;
   hov(id);
 }
-function cartaBaris(id,data,lbl){
+function cartaBaris(id,data,lbl,warna){
   if(!data.length){document.getElementById(id).innerHTML=`<div class="empty">Tiada data.</div>`;return;}
   const W=520,rowH=36,PL=112,PR=76,H=data.length*rowH+10,w=W-PL-PR;
-  const max=Math.max(...data.map(d=>d.v),1),col=cv("--brand");
+  const max=Math.max(...data.map(d=>d.v),1),col=cv(warna||"--brand");
   let s="";
   data.forEach((d,i)=>{
     const y=i*rowH+8, bw=Math.max(w*d.v/max,4);
